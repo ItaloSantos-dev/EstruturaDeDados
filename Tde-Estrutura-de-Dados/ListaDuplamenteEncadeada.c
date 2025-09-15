@@ -59,7 +59,7 @@ No* proxSite(No* pagAtual ){
 
 }
 
-No* limparHistorico(No* cabeca){
+void limparHistorico(No* cabeca){
     No* atual = cabeca->prox;
     while(atual!=NULL){
         No* liberar = atual;
@@ -70,14 +70,23 @@ No* limparHistorico(No* cabeca){
 }
 
 No* apagarUltimaPag(No* cabeca){
+    No* pagAtual = cabeca;
     No* atual = cabeca->prox;
-    while(atual->prox!=NULL){
-        atual=atual->prox;
+    if(atual==NULL){
+        free(atual);
     }
-    No* pagAtual=atual->ante;
-    atual->ante->prox=NULL;
-    free(atual);
+    else{
+        while(atual->prox!=NULL){
+            pagAtual = atual;
+            atual=atual->prox;
+        }
+
+        pagAtual->prox=NULL;
+        free(atual);
+
+    }
     return pagAtual;
+
 
 }
 
@@ -106,7 +115,12 @@ int main(){
         }
         else if(acao==2){
             pagatual = apagarUltimaPag(&cabeca);
-            printf("Voce esta na pagina %s\n", pagatual->pag.nome);
+            if(pagatual->ante!=NULL){
+                printf("Voce esta na pagina %s\n", pagatual->pag.nome);
+            }
+            else{
+                printf("Voce esta no menu principal\n");
+            }
             printf("---------------------------------------\n");
         }
         else if(acao==3){

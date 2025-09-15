@@ -20,21 +20,26 @@ int main(){
             int loop2 = 1;
             while(loop2){
                 printf("Digite qual poltrona voce deseja para assistir o filme | 0-24 \n");
-            int poltronaEscolhida;
-            scanf("%i", &poltronaEscolhida);
-            getchar();
-            if(lugaresCinema[poltronaEscolhida]==1){
-                printf(("Desculpe, o assento escolhido esta ocupado, escolha outra poltrona\n"));
+                int poltronaEscolhida;
+                scanf("%i", &poltronaEscolhida);
+                getchar();
+                if(poltronaEscolhida<0 || poltronaEscolhida>24){
+                    printf("Digite um numero valido, entre 0 e 24\n");
+                }
+                else{
+                    if(lugaresCinema[poltronaEscolhida]==1){
+                    printf(("Desculpe, o assento escolhido esta ocupado, escolha outra poltrona\n"));
 
-            }
-            else{
-                lugaresCinema[poltronaEscolhida]=1;
-                int linha = poltronaEscolhida/5;
-                char coluna = 'C' +  ((poltronaEscolhida%5)-2);
-                printf("Parabens, seu assento na poltrona %i%c foi guardado com sucesso\n", linha, coluna);
-                loop2=0;
+                    }
+                    else{
+                        lugaresCinema[poltronaEscolhida]=1;
+                        int linha = poltronaEscolhida/5;
+                        char coluna = 'C' +  ((poltronaEscolhida%5)-2);
+                        printf("Parabens, seu assento na poltrona %i%c foi guardado com sucesso\n", linha, coluna);
+                        loop2=0;
 
-            }
+                    }
+                }
             }
         }
         else if(acao==2){

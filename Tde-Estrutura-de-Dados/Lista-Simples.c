@@ -48,6 +48,7 @@ void limparPlaylist(No* cabeca){
 }
 
 void addMusicParaTeste(No* cabeca){
+    limparPlaylist(cabeca);
     No* m5 = (No*) malloc(sizeof(No));
     m5->prox = NULL;
     strcpy(m5->mu.nome, "Tocando em Frente");
@@ -103,7 +104,7 @@ Musica lerMusica(){
     m.autor[strcspn(m.autor, "\n")]='\0';
     printf("Digite o genero da musica\n");
     fgets(m.genero, sizeof(m.genero), stdin);
-    m.autor[strcspn(m.autor, "\n")]='\0';
+    m.genero[strcspn(m.genero, "\n")]='\0';
     printf("Digite o ano da musica\n");
     scanf("%i", &m.ano_lancamento);
     getchar();
