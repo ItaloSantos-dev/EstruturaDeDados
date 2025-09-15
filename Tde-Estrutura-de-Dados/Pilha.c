@@ -58,19 +58,13 @@ No* empilhar(No* topo){
 
 No* desempilhar(No* topo){
     if(topo ==NULL){
-        printf("A pilha esta vazia\n");
+        printf("A pilha de funcao esta vazia\n");
         return NULL;
     }
-    else if(topo->prox==NULL){
-        No* liberar = topo;
-        topo=NULL;
-        free(liberar);
-    }
-    else{
-        No* liberar = topo;
-        topo=topo->prox;
-        free(liberar);
-    }
+    No* liberar=topo;
+    topo=topo->prox;
+    free(liberar);
+
     return topo;
 
 }
@@ -114,15 +108,17 @@ No* executarInstrucoes(No* topo){
     No* atual = topo;
     if(atual==NULL){
         printf("A pilha de funcao esta vazia\n");
+        return NULL;
     }
     else{
-        No* liberar;
+        No* proximo;
         while(atual!=NULL){
-        printf("Executando e liberando: %s \n", atual->ins.acao );
-        liberar = atual;
-        free(liberar);
-        esperar(1000);
-        atual=atual->prox;
+            printf("Executando e liberando: %s \n", atual->ins.acao );
+            proximo = atual->prox;
+            free(atual);
+            esperar(1000);
+            atual=proximo;
+
         }
         printf("Fim da pilha de execucao\n");
         topo =NULL;
@@ -166,3 +162,4 @@ int main(){
     }
 
 }
+
