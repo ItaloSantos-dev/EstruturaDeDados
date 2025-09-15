@@ -133,6 +133,7 @@ int main(){
     No* topo=NULL;
     printf("-------Simulando chamada de funcao dentro de outra funcao-------\n");
     while(loop){
+        printf("--------------------------------------------------------------------------1\n");
         printf("Digite o que deseja fazer\n");
         printf("1 - Adicionar uma nova instrucao\n");
         printf("2 - Remover a ultima instrucao\n");
