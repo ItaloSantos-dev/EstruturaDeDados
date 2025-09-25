@@ -160,52 +160,6 @@ void removerMusica(No* cabeca){
 
 }
 
-//printando todas músicas
-void verTodas(No* cabeca){
-    No* atual = cabeca->prox;
-    if(atual==NULL){
-        printf("A playlist esta vazia\n");
-    }
-    else{
-        while(atual!=NULL){
-        printf("------------------------\n");
-        printf("Nome: %s\n", atual->mu.nome);
-        printf("Autor: %s\n", atual->mu.autor);
-        printf("Genero: %s\n", atual->mu.genero);
-        printf("Ano de lancamento: %i\n", atual->mu.ano_lancamento);
-        printf("------------------------\n");
-        atual=atual->prox;
-        }
-    }
-
-}
-
-void tocarMusica(No* cabeca){
-    No* atual = cabeca->prox;
-     if(atual==NULL){
-        printf("A playlist esta vazia, adicione musicas para reproduzi-las\n");
-
-    }
-    else{
-        printf("Digite o nome da musica que voce deseja tocar\n");
-        char musicaBuscada[51];
-        fgets(musicaBuscada, sizeof(musicaBuscada), stdin);
-        musicaBuscada[strcspn(musicaBuscada, "\n")]='\0';
-        while( atual!=NULL && strcmp(musicaBuscada, atual->mu.nome)!=0){
-            atual=atual->prox;
-        }
-        if(atual==NULL){
-            printf("musica nao encontrada\n");
-        }
-        else{
-            printf("------------------------\n");
-            printf("Tocando: %s\n", atual->mu.nome);
-            printf("Autor: %s\n", atual->mu.autor);
-        }
-
-    }
-
-}
 
 void RemoverUmaMusica(No *cabeca){
     No* atual = cabeca->prox;
@@ -217,6 +171,7 @@ void RemoverUmaMusica(No *cabeca){
         printf("Digite o nome da musica que voce deseja remover\n");
         char musicaBuscada[51];
         fgets(musicaBuscada, (sizeof(musicaBuscada)), stdin);
+        musicaBuscada[strcspn(musicaBuscada, "\n")] = '\0';
         No* antecessor = cabeca;
         while(atual!=NULL && strcmp(musicaBuscada, atual->mu.nome)!=0){
             antecessor=atual;
@@ -274,12 +229,10 @@ int main(){
         printf("Digite o que deseja fazer\n");
         printf("1 - Adicionar uma musica\n");
         printf("2 - Remover a ultima musica\n");
-        printf("3 - Ver todas musicas da playlist\n");
-        printf("4 - Tocar todas as musicas\n");
-        printf("5 - Tocar uma musica\n");
-        printf("6 - Remover musica\n");
-        printf("7 - Limpar playlist\n");
-        printf("8 - Adicionar musicas Teste\n");
+        printf("3 - Tocar todas as musicas\n");
+        printf("4 - Remover musica\n");
+        printf("5 - Limpar playlist\n");
+        printf("6 - Adicionar musicas Teste\n");
         printf("0 - Sair\n");
         int acao;
         scanf("%i", &acao);
@@ -292,22 +245,16 @@ int main(){
             removerMusica(&cabeca);
         }
         else if(acao==3){
-            verTodas(&cabeca);
-        }
-        else if(acao==4){
             tocarTodasMusicas(&cabeca);
         }
-        else if(acao==5){
-            tocarMusica(&cabeca);
-        }
-        else if(acao==6){
+        else if(acao==4){
             RemoverUmaMusica(&cabeca);
         }
-        else if(acao==7){
+        else if(acao==5){
             limparPlaylist(&cabeca);
             printf("A playlist foi limpa\n");
         }
-        else if(acao==8){
+        else if(acao==6){
             addMusicParaTeste(&cabeca);
         }
         else if(acao==0){
