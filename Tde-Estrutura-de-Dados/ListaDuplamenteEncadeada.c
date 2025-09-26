@@ -38,6 +38,34 @@ No* acessarPag(No* cabeca){
     return novaPag;
 }
 
+No* acessarPagExistente(No* cabeca){
+    printf("Digite o nome da pagina ja existente que voce esta buscando\n");
+    char paginaBuscada[51];
+    fgets(paginaBuscada, sizeof(paginaBuscada), stdin);
+    paginaBuscada[strcspn(paginaBuscada, "\n")]='\0';
+
+    No* atual = cabeca->prox;
+    if(atual==NULL){
+        printf("A lista esta vazia\n");
+        return cabeca;
+
+    }
+    else{
+        while (atual!=NULL && strcmp(paginaBuscada, atual->pag.nome)!=0){
+            atual=atual->prox;
+        }
+        if(atual==NULL){
+            printf("Voce nao acessou esta pagina\n");
+        }
+        else{
+            return atual;
+        }
+    }
+
+
+
+}
+
 No* voltarSite(No* pagAtual){
     No* atual = pagAtual;
     if(atual->ante!=NULL){
@@ -104,6 +132,7 @@ int main(){
         printf("2 - Apagar ultima pagina \n");
         printf("3 - Voltar para pagina anterior\n");
         printf("4 - Avancar para proxima pagina \n");
+        printf("5 - Acessar uma pagina ja acessada \n");
         printf("0 - Sair \n");
         int acao;
         scanf("%i", &acao);
@@ -137,6 +166,17 @@ int main(){
             pagatual = proxSite(pagatual);
             printf("Voce esta na pagina %s\n", pagatual->pag.nome);
             printf("---------------------------------------\n");
+        }
+        else if(acao==5){
+            pagatual = acessarPagExistente(&cabeca);
+            if(pagatual->ante!=NULL){
+                printf("Voce esta na pagina %s\n", pagatual->pag.nome);
+            }
+            else{
+                printf("Voce esta no menu principal\n");
+            }
+            printf("---------------------------------------\n");
+
         }
         else if(acao==0){
             limparHistorico(&cabeca);

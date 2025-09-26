@@ -127,6 +127,29 @@ No* executarInstrucoes(No* topo){
 
 
 }
+void buscarFuncao(No* topo){
+    printf("Digite exatamente o nome da funcao que voce busca\n");
+    char funcaobuscada[51] ;
+    fgets(funcaobuscada, sizeof(funcaobuscada), stdin);
+    funcaobuscada[strcspn(funcaobuscada,"\n")]='\0';
+
+    if(topo==NULL){
+        printf("A pilha esta vazia\n");
+    }
+    else{
+        No* atual = topo;
+        while (atual!=NULL && strcmp(funcaobuscada, atual->ins.acao)!=0){
+            atual=atual->prox;
+        }
+        if(atual==NULL){
+            printf("A funcao nao esta no escopo\n");
+        }
+        else{
+            printf("Funcao: %s encontrada\n", atual->ins.acao);
+        }
+    }
+
+}
 
 int main(){
     int loop =1;
@@ -135,10 +158,11 @@ int main(){
     while(loop){
         printf("--------------------------------------------------------------------------1\n");
         printf("Digite o que deseja fazer\n");
-        printf("1 - Adicionar uma nova instrucao\n");
-        printf("2 - Remover a ultima instrucao\n");
-        printf("3 - Ver todas instrucoes\n");
-        printf("4 - Executar\n");
+        printf("1 - Adicionar uma nova funcoes\n");
+        printf("2 - Remover a ultima funcoes\n");
+        printf("3 - Ver todas funcoes\n");
+        printf("4 - Buscar uma funcao\n");
+        printf("5 - Executar\n");
         printf("0 - Sair\n");
         int acao;
         scanf("%i", &acao);
@@ -153,6 +177,10 @@ int main(){
             lerTodasInstrucoes(topo);
         }
         else if(acao==4){
+            buscarFuncao(topo);
+
+        }
+        else if(acao==5){
             topo = executarInstrucoes(topo);
         }
         else if(acao==0){

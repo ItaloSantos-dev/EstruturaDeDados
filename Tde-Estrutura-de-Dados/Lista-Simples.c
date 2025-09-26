@@ -40,11 +40,8 @@ void limparPlaylist(No* cabeca){
         apagar=atual;
         atual=atual->prox;
         free(apagar);
-
-
     }
     cabeca->prox=NULL;
-
 }
 
 void addMusicParaTeste(No* cabeca){
@@ -85,8 +82,6 @@ void addMusicParaTeste(No* cabeca){
     m1->mu.ano_lancamento = 1977;
 
     cabeca->prox=m1;
-
-
 
 }
 
@@ -145,8 +140,8 @@ void removerMusica(No* cabeca){
     }
     else{
         while(atual->prox!=NULL){
-        antecessor = atual;
-        atual=atual->prox;
+            antecessor = atual;
+            atual=atual->prox;
         }
         antecessor->prox= NULL;
         free(atual);
@@ -160,10 +155,9 @@ void removerMusica(No* cabeca){
 
 }
 
-
+//Remover uma música com base no nome
 void RemoverUmaMusica(No *cabeca){
     No* atual = cabeca->prox;
-
     if(atual==NULL){
         printf("A playlist esta vazia\n");
     }
@@ -172,6 +166,7 @@ void RemoverUmaMusica(No *cabeca){
         char musicaBuscada[51];
         fgets(musicaBuscada, (sizeof(musicaBuscada)), stdin);
         musicaBuscada[strcspn(musicaBuscada, "\n")] = '\0';
+
         No* antecessor = cabeca;
         while(atual!=NULL && strcmp(musicaBuscada, atual->mu.nome)!=0){
             antecessor=atual;

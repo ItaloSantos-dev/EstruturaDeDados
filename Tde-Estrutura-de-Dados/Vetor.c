@@ -11,6 +11,7 @@ int main(){
         printf("Digite o que deseja fazer\n");
         printf("1 - Escolher uma poltrona\n");
         printf("2 - ver poltronas \n");
+        printf("3 - Ver poltrona especifica\n");
         printf("0 - Sair\n");
         int acao;
         scanf("%i", &acao);
@@ -28,7 +29,7 @@ int main(){
                 }
                 else{
                     if(lugaresCinema[poltronaEscolhida]==1){
-                    printf(("Desculpe, o assento escolhido esta ocupado, escolha outra poltrona\n"));
+                        printf(("Desculpe, o assento escolhido esta ocupado, escolha outra poltrona\n"));
 
                     }
                     else{
@@ -65,6 +66,19 @@ int main(){
                     }
             }
             printf("\n");
+        }
+        else if(acao==3){
+            printf("Digite qual poltrona deseja consultar\n");
+            int poltronaEscolhida;
+            scanf("%i", &poltronaEscolhida);
+            getchar();
+            if(lugaresCinema[poltronaEscolhida]==1){
+                printf("Esta poltrona esta ocupada\n");
+            }
+            else{
+                printf("Essa poltrona esta disponivel\n");
+            }
+
         }
         else if(acao==0){
             loop=0;
