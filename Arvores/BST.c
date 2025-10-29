@@ -44,6 +44,23 @@ void inserirNo(No* raizAtual, No* novo){
 }
 
 
+void imprimir(No* raizAtual){
+    if(raizAtual==NULL){
+        printf("Fim da arvore\n");
+    }
+    else{
+        printf("Dado: %i\n", raizAtual->dado);
+        if(raizAtual->esq!=NULL){
+            imprimir(raizAtual->esq);
+        }
+        if(raizAtual->dir!=NULL){
+            imprimir(raizAtual->dir);
+        }
+    }
+
+}
+
+
 
 void inserir(BST* arvore){
     No* novo = (No*)malloc(sizeof(No));
@@ -90,6 +107,7 @@ int main(){
         printf("Digite o que deseja fazer\n");
         printf("1 - Inserir um dado\n");
         printf("2 - Buscar um dado\n");
+        printf("3 - Imprimir arvore\n");
         int acao;
         scanf("%i", &acao);
         getchar();
@@ -102,6 +120,9 @@ int main(){
             scanf("%i", &dadoBuscado);
             getchar();
             buscar(arvore.raiz, dadoBuscado);
+        }
+        else if(acao==3){
+            imprimir(arvore.raiz);
         }
     }
 
