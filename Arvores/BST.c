@@ -11,7 +11,7 @@ typedef struct no{
 typedef struct bst{
     No* raiz;
 }BST;
-;
+
 
 
 int preencherDado(){
@@ -23,30 +23,12 @@ int preencherDado(){
 }
 
 
-void inserirNo(No* raizAtual, No* novo){
-    if(novo->dado<=raizAtual->dado){
-        if(raizAtual->esq==NULL){
-            raizAtual->esq = novo;
-        }
-        else{
-            inserirNo(raizAtual->esq, novo);
-        }
-    }
-    else{
-        if(raizAtual->dir==NULL){
-            raizAtual->dir = novo;
-        }
-        else{
-            inserirNo(raizAtual->dir, novo);
-        }
-    }
 
-}
 
 
 void imprimir(No* raizAtual){
     if(raizAtual==NULL){
-        printf("Fim da arvore\n");
+        printf("Arvore esta vazia\n");
     }
     else{
         printf("Dado: %i\n", raizAtual->dado);
@@ -62,23 +44,40 @@ void imprimir(No* raizAtual){
 
 
 
-void inserir(BST* arvore){
-    No* novo = (No*)malloc(sizeof(No));
-    novo->dir=NULL;
-    novo->esq=NULL;
-    novo->dado=preencherDado();
-
-    //Se a arvore estiver vazia
-    if(arvore->raiz==NULL){
-        arvore->raiz=novo;
-        return;
+void inserirNo(No* raizatual, No* novo){
+    if(novo->dado<=raizatual->dado){
+        if(raizatual->esq==NULL){
+            raizatual->esq = novo;
+        }
+        else{
+            inserirNo(raizatual->esq, novo);
+        }
     }
-    //Arvore nao esta vazia
     else{
-        inserirNo(arvore->raiz, novo);
+        if(raizatual->dir==NULL){
+            raizatual->dir=novo;
+        }
+        else{
+            inserirNo(raizatual->dir, novo);
+        }
     }
 
 }
+
+
+void inserir(BST* arvore){
+    No* novo = malloc(sizeof(No));
+    novo->dado = preencherDado();
+    novo->dir = NULL;
+    novo->esq = NULL;
+    if(arvore->raiz==NULL){
+        arvore->raiz = novo;
+    }
+    else{
+        inserirNo(arvore->raiz, novo);
+    }
+}
+
 
 void buscar(No* raizAtual, int dadoBuscado){
     if(raizAtual==NULL){
@@ -99,6 +98,23 @@ void buscar(No* raizAtual, int dadoBuscado){
     }
 }
 
+/*void remover(No* raizAtual, int dado){
+    if(raizAtual==NULL){
+        printf("O dado a ser removido não existe na arvore\n");
+    }
+    else if(raizAtual->dado==dado){
+        //Se o no a ser removido nao tiver filhos
+        if(raizAtual->esq==NULL && raizAtual->dir==NULL){
+            free(raizAtual);
+        }
+        else{
+            //Se tiver filho esq
+        }
+    }
+}*/
+
+
+
 int main(){
     BST arvore;
     arvore.raiz=NULL;
@@ -108,6 +124,7 @@ int main(){
         printf("1 - Inserir um dado\n");
         printf("2 - Buscar um dado\n");
         printf("3 - Imprimir arvore\n");
+        printf("4 - Remover um nó\n");
         int acao;
         scanf("%i", &acao);
         getchar();
@@ -123,6 +140,14 @@ int main(){
         }
         else if(acao==3){
             imprimir(arvore.raiz);
+        }
+        else if (acao==4){
+            printf("Digite qual dado deseja remover da arvore\n");
+            /*int dadoRemover;
+            scanf("%i", &dadoRemover);
+            getchar();
+            remover(arvore.raiz, dadoRemover);*/
+
         }
     }
 
