@@ -193,12 +193,7 @@ int main(){
         printf("4 - Ver altura\n");
         printf("5 - Remover um no\n");
 
-        int acao;
-        scanf("%i", &acao);
-        getchar();
-        if(acao==1){
-            inserir(&arvore);
-        }
+
         else if(acao==2){
             if(arvore.raiz==NULL){
                 printf("A arvore esta vazia\n");
